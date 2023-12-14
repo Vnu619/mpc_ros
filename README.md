@@ -10,5 +10,98 @@ This Package depends on the following libraries
 
 ## Installing Dependencies
 ### Installing Dependencies for Ipopt Solver 
+```bash
+sudo apt-get install gcc g++ gfortran git patch wget pkg-config liblapack-dev libmetis-dev
+```
+### Installing ASL (Ampl Solver Library)
+```bash
+mkdir ~/Ipopt_pkg
+cd Ipopt_pkg
+git clone https://github.com/coin-or-tools/ThirdParty-ASL.git
+cd ThirdParty-ASL
+sudo ./get.ASL
+sudo ./configure
+sudo make
+sudo make install
+cd ..
+```
+### Installing HSL (Harwell Subroutines Library)
+```bash
+git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
+cd ThirdParty-HSL
+sudo ./get.HSL
+sudo ./configure
+sudo make
+sudo make install
+cd ..
+```
+### Installing MUMPS Linear Solver
+```bash
+git clone https://github.com/coin-or-tools/ThirdParty-MUMPS.git
+cd ThirdParty-MUMPS
+sudo ./get.MUMPS
+sudo ./configure
+sudo make
+sudo make install
+cd ..
+```
+### Installing Ipopt
+```bash
+git clone https://github.com/coin-or/Ipopt.git
+cd Ipopt
+mkdir build
+cd build
+sudo ../configure
+sudo make
+sudo make test
+sudo make install
+```
+### Improve the Environment
+```bash
+cd /usr/local/include
+sudo cp coin-or coin -r
+sudo ln -s /usr/local/lib/libcoinmumps.so.3 /usr/lib/libcoinmumps.so.3
+sudo ln -s /usr/local/lib/libcoinhsl.so.2 /usr/lib/libcoinhsl.so.2
+sudo ln -s /usr/local/lib/libipopt.so.3 /usr/lib/libipopt.so.3
+```
+### Installing CppAD
+```bash
+sudo apt-get install cppad
+```
+### Installing Eigen and PCL
+```bash
+sudo apt update
+sudo apt install libpcl-dev
+sudo apt install libeigen3-dev
+```
+## Setting up the workspace and MPC packages
+```bash
+mkdir -p ~/catkin_ws/src
+cd catkin_ws/src
+git clone https://github.com/Vnu619/mpc_ros.git
+cd ..
+catkin_make
+```
+## Running the test Environment
+```bash
+cd catkin_ws
+source devel/setup.bash
+roslaunch mpc_gen mpc_agv_sim.launch
+```
+## Results
+# Test result for navigation with no obstacles placed
+<img width="540" alt="Screenshot 2023-09-23 at 1 10 03 PM" src="https://github.com/Vnu619/mpc_ros/blob/main/mpc_gen/odom_trajectory_plo-1t.png">
+<br>
+
+# Test result for navigation with randomly placed obstacles
+<img width="540" alt="Screenshot 2023-09-23 at 1 10 03 PM" src="https://github.com/Vnu619/mpc_ros/blob/main/mpc_gen/odom_trajectory_plot.png">
+<br>
+
+
+
+
+
+
+
 
 
