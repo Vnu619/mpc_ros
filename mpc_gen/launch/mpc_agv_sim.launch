@@ -1,0 +1,5 @@
+<launch>
+<include file="$(find gem_gazebo)/launch/gem_gazebo_rviz.launch"/>
+<node name="mpc_gen_node1" pkg="mpc_gen" type="mpc_gen_node1" output="screen"/>
+<node name="graph_plotter" pkg="mpc_gen" type="graph_plotter.py"/>
+</launch>

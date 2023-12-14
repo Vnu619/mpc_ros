@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- robot_name as a constant -->
+    <arg name="robot_name" value="gem"/>
+
+    <!-- Gazebo settings-->
+    <arg name="paused" default="true"/>
+    <arg name="gui" default="true"/>
+    <!-- LaneNet node settings -->
+    <arg name="frame_id" default="front_wheel_axle"/>
+    <arg name="use_gpu" default="true"/>
+    <arg name="use_rviz" default="true"/>
+    <arg name="debug" default="true"/>
+
+    <include file="$(find gem_gazebo)/launch/gem_gazebo_rviz.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="use_rviz" value="false"/>  <!--Disable rviz because we are loading our own rviz settings-->
+    </include>
+
+    <include file="$(find gem_gazebo)/launch/gem_sensor_info.launch">
+        <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+
+    <group ns="$(arg robot_name)">
+        <remap from="image_raw" to="front_single_camera/image_raw"/>
+        <include file="$(find gem_lanenet)/launch/spawn_lanenet_node.launch">
+            <arg name="use_gpu" value="$(arg use_gpu)" />
+            <arg name="debug" value="$(arg debug)" />
+        </include>
+
+        <node if="$(arg use_rviz)" name="rviz_$(arg robot_name)" pkg="rviz" type="rviz"
+              args="-d $(find gem_lanenet)/rviz/gem_lanenet_rviz.rviz" />
+    </group>
+</launch>
