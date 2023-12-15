@@ -47,6 +47,9 @@ void MPCController::lidar3DCallback(const sensor_msgs::PointCloud2::ConstPtr& ms
 }
 void MPCController::lidarCallback(const sensor_msgs::LaserScan::ConstPtr& scan) {
     obstacles = processScan(*scan ,x, y);
+    for(int i =0; i<obstacles.size(); i++){
+        std::cout<<"x = "<<obstacles[i].x<<"  y = "<<obstacles[i].y<<std::endl;
+    }
 }
 
 
