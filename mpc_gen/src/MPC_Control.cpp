@@ -286,7 +286,7 @@ std::vector<pcl::PointXYZ> process3DLidarData(const pcl::PointCloud<pcl::PointXY
 int main(int argc, char** argv) {
     ros::init(argc, argv, "mpc_controller_node");
     ros::NodeHandle nh;
-    const std::string filename = "/home/oem/gem2_ws/src/mpc_ros/mpc_gen/src/wps.csv";
+    const std::string filename = "/catkin_ws/src/mpc_ros/mpc_gen/src/wps.csv";
     std::vector<Point> waypoints = readCSV(filename);
     //MPCController mpc_controller;
     // 

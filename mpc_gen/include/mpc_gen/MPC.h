@@ -2,8 +2,11 @@
 #define MPC_H
 
 #include <vector>
-#include "Eigen-3.3/Eigen/Core"
-
+#include "../src/Eigen-3.3/Eigen/Core"
+//#include <pcl/filters/passthrough.h>
+//#include <pcl/kdtree/kdtree.h>
+//#include <pcl/segmentation/extract_clusters.h>
+//
 
 using namespace std;
 
@@ -33,6 +36,7 @@ class MPC {
   virtual ~MPC();
 
   // Solve the model given an initial state and polynomial coefficients.
+  // Return the first actuatotions.
   vector<double> Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs, std::vector<Point2D> obstacles);
 
   void init(double cte_weight, double epsi_weight, double v_weight, double delta_weight,

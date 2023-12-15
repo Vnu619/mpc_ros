@@ -1,24 +1,26 @@
-#ifndef MPC_CONTROLLER_H
-#define MPC_CONTROLLER_H
+#ifndef MPC_CONTROL_H
+#define MPC_CONTROL_H
 
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
 #include <ackermann_msgs/AckermannDriveStamped.h>
+#include <std_msgs/Float64.h>
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/PointCloud2.h>
-#include "Eigen-3.3/Eigen/Core"
+#include "../src/Eigen-3.3/Eigen/Core"
 #include <vector>
-
-// Forward declaration of MPC class
+#include "MPC.h"
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/segmentation/extract_clusters.h>
+#include <pcl/search/kdtree.h>
+#include <pcl/common/centroid.h>
+#include <pcl/filters/crop_box.h>
 class MPC;
 
-struct Point {
-    double x, y, yaw;
-};
 
-struct Point2D {
-    double x, y;
-};
 
 class MPCController {
 public:
@@ -33,12 +35,21 @@ private:
     ros::Subscriber lidar_3dsub_;
     ros::Subscriber odom_sub_;
     ros::Publisher ackermann_pub_;
-    double steer_value, throttle_value, speed_value, latency_adjustment_sec;
+    ros::Publisher cte_pub_;
+    double steer_value, throttle_value, speed_value, latency_adjustment_sec, cte_value;
     std::vector<Point> all_waypoints_;
     size_t current_waypoint_index_;
     std::shared_ptr<MPC> mpc_;
     double x, y;
+    double Lf_=1.0;
     std::vector<Point2D> obstacles;
 };
 
-#endif // MPC_CONTROLLER_H
+std::vector<Point2D> processScan(const sensor_msgs::LaserScan& scan, float x, float y);
+std::vector<Point> readCSV(const std::string& filename);
+double polyeval(Eigen::VectorXd coeffs, double x);
+Eigen::VectorXd polyfit(Eigen::VectorXd xvals, Eigen::VectorXd yvals, int order);
+std::vector<pcl::PointXYZ> process3DLidarData(const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud);
+
+
+#endif // MPC_CONTROL_H
