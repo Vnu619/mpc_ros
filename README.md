@@ -7,13 +7,25 @@ This Package depends on the following libraries
 * CppAD
 * PCL
 * Eigen
-
+## Building the package
+There are two methods to build the package
+* Method 1: Build the dockerfile
+* Method 2: Build from Source
+## Method 1: Building the dockerfile
+```bash
+git clone https://github.com/Vnu619/mpc_ros.git
+cd mpc_ros
+sudo docker build -t ros-mpc .
+sudo docker run -it ros-mpc
+```
+## Method 2: Build from Source
 ## Installing Dependencies
 ### Installing Dependencies for Ipopt Solver 
+#### Step1:
 ```bash
 sudo apt-get install gcc g++ gfortran git patch wget pkg-config liblapack-dev libmetis-dev
 ```
-### Installing ASL (Ampl Solver Library)
+#### Step2: Installing ASL (Ampl Solver Library)
 ```bash
 mkdir ~/Ipopt_pkg
 cd Ipopt_pkg
@@ -25,7 +37,7 @@ sudo make
 sudo make install
 cd ..
 ```
-### Installing HSL (Harwell Subroutines Library)
+#### Step3: Installing HSL (Harwell Subroutines Library)
 ```bash
 git clone https://github.com/coin-or-tools/ThirdParty-HSL.git
 cd ThirdParty-HSL
@@ -35,7 +47,7 @@ sudo make
 sudo make install
 cd ..
 ```
-### Installing MUMPS Linear Solver
+#### Step4: Installing MUMPS Linear Solver
 ```bash
 git clone https://github.com/coin-or-tools/ThirdParty-MUMPS.git
 cd ThirdParty-MUMPS
@@ -45,7 +57,7 @@ sudo make
 sudo make install
 cd ..
 ```
-### Installing Ipopt
+#### Step5: Installing Ipopt
 ```bash
 git clone https://github.com/coin-or/Ipopt.git
 cd Ipopt
@@ -56,7 +68,7 @@ sudo make
 sudo make test
 sudo make install
 ```
-### Improve the Environment
+#### Step5: Improve the Environment
 ```bash
 cd /usr/local/include
 sudo cp coin-or coin -r
