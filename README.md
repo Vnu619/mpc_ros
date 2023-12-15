@@ -94,7 +94,7 @@ roslaunch mpc_gen mpc_agv_sim.launch
 <br>
 
 # Test result for navigation with randomly placed obstacles
-<img width="540" alt="Screenshot 2023-09-23 at 1 10 03 PM" src="https://github.com/Vnu619/mpc_ros/blob/main/mpc_gen/odom_trajectory_plot.png">
+<img width="540" alt="Screenshot 2023-09-23 at 1 10 03 PM" src="https://github.com/Vnu619/mpc_ros/blob/main/mpc_gen/odom_trajectory_plot_obs.png">
 <br>
 
 
