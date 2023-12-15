@@ -1,5 +1,7 @@
 # Model Predictive Control for Ground Vehicle Navigation
 ## Introduction
+This repository provides a simulated vehicle model of [Polaris GEM e2 Electric Cart](https://gem.polaris.com/en-us/e2/) in the [Gazebo](http://gazebosim.org/) simulation environment as well as [ROS](https://www.ros.org/) based sensors and controllers for autonomous-driving. The Polaris GEM e2 vehicle model was measured and modeled using Solidworks by Hang Cui and Jiaming Zhang. Hang Cui further constructed the URDF files of the vehicle model compatible with ROS, RViz, and Gazebo.
+
 The steps here will guide the users to setup and install packages to run MPC Controller for groundvehicles (POLARIS GEM E2 Simulator). 
 ## Dependencies
 This Package depends on the following libraries
